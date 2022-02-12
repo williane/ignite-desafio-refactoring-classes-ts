@@ -1,21 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 
 function Modal({ isOpen, children, setIsOpen }) {
   const [modalStatus, setModalStatus] = useState(isOpen);
-  const prevPropsRef = useRef();
 
   useEffect(() => {
-    prevPropsRef.current = modalStatus;
-  });
-
-  const modalStatusPreviousValue = prevPropsRef.current ?? modalStatus;
-
-  useEffect(() => {
-    if (modalStatusPreviousValue !== modalStatus) {
-      setModalStatus(isOpen);
-    }
-  }, [modalStatus, modalStatusPreviousValue, isOpen]);
+    setModalStatus(isOpen);
+  }, [isOpen]);
 
   return (
     <ReactModal
